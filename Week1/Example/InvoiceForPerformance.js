@@ -3,6 +3,8 @@
  * @param { string } invoice.customer - 고객명
  * @param { Array.<{ playID: string, audience: number }> } invoice.performances - 공연 내역 배열
  * @param { Object } plays - 공연 정보를 담고 있는 객체 (각 playID에 대응하는 정보 포함)
+ * @param { string } plays.name - 공연명
+ * @param { string } plays.type - 공연 종류
  */
 export function statement(invoice, plays) {
 	
