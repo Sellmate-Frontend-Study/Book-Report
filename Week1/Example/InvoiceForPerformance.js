@@ -12,6 +12,17 @@
 export function statement(invoice, plays) {
 	
 	/**
+	 * @returns {number}
+	 */
+	function totalVolumeCredits() {
+		let volumeCredits = 0;
+		for (let perf of invoice.performances) {
+			volumeCredits += volumeCreditsFor(perf);
+		}
+		return volumeCredits;
+	}
+	
+	/**
 	 * @param { number } aNumber
 	 * @returns { string }
 	 */
