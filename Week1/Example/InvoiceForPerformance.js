@@ -14,14 +14,24 @@ export function statement(invoice, plays) {
 	/**
 	 * @param { Object } aPerformance - 공연 내역
 	 * @param { number } aPerformance.audience - 공연 관객 수
+	 * @param { string } aPerformance.playID - 공연 ID
+	 * @returns { { name: string, type: string } } -각 공연 ID에 해당하는 객체. 각 객체는 공연명과 공연 종류를 포함한다.
+	 */
+	function playFor(aPerformance) {
+		return plays[aPerformance.playID];
+	}
+	
+	/**
+	 * @param { Object } aPerformance - 공연 내역
+	 * @param { number } aPerformance.audience - 공연 관객 수
 	 * @param { string } aPerformance.playID - 공연 정보
 	 * @param { Object } play - 공연 정보를 담고 있는 객체 (각 playID에 대응하는 정보 포함)
 	 * @returns { number }
 	 */
-	function amountFor(aPerformance, play) {
+	function amountFor(aPerformance) {
 		let result = 0;
 		
-		switch (play.type) {
+		switch (playFor(aPerformance).type) {
 			case 'tragedy':
 				result = 40000;
 				if (aPerformance.audience > 30) {
@@ -36,19 +46,9 @@ export function statement(invoice, plays) {
 				result += 300 * aPerformance.audience;
 				break;
 			default:
-				throw new Error(`알 수 없는 장르: ${play.type}`);
+				throw new Error(`알 수 없는 장르: ${playFor(aPerformance).type}`);
 		}
 		return result;
-	}
-	
-	/**
-	 * @param { Object } aPerformance - 공연 내역
-	 * @param { number } aPerformance.audience - 공연 관객 수
-	 * @param { string } aPerformance.playID - 공연 ID
-	 * @returns { { name: string, type: string } } -각 공연 ID에 해당하는 객체. 각 객체는 공연명과 공연 종류를 포함한다.
-	 */
-	function playFor(aPerformance) {
-		return plays[aPerformance.playID];
 	}
 	
 	let totalAmount = 0;
@@ -57,7 +57,7 @@ export function statement(invoice, plays) {
 	const format = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2 }).format;
 	
 	for (let perf of invoice.performances) {
-		let thisAmount = amountFor(perf, playFor(perf))
+		let thisAmount = amountFor(perf)
 		
 		// 포인트를 적립한다.
 		volumeCredits += Math.max(perf.audience - 30, 0);
