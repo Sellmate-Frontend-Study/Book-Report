@@ -45,7 +45,7 @@ export function statement(invoice, plays) {
 	 * @param { Object } aPerformance - 공연 내역
 	 * @param { number } aPerformance.audience - 공연 관객 수
 	 * @param { string } aPerformance.playID - 공연 ID
-	 * @returns { Object.<string, { name: string, type: string }> } -각 공연 ID에 해당하는 객체. 각 객체는 공연명과 공연 종류를 포함한다.
+	 * @returns { { name: string, type: string } } -각 공연 ID에 해당하는 객체. 각 객체는 공연명과 공연 종류를 포함한다.
 	 */
 	function playFor(aPerformance) {
 		return plays[aPerformance.playID];
