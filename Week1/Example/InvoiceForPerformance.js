@@ -37,7 +37,6 @@ export function statement(invoice, plays) {
 	 * @param { Object } aPerformance - 공연 내역
 	 * @param { number } aPerformance.audience - 공연 관객 수
 	 * @param { string } aPerformance.playID - 공연 정보
-	 * @param { Object } play - 공연 정보를 담고 있는 객체 (각 playID에 대응하는 정보 포함)
 	 * @returns { number }
 	 */
 	function amountFor(aPerformance) {
