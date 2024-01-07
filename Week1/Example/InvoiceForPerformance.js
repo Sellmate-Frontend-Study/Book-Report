@@ -1,4 +1,8 @@
 /**
+ * NOTE: 중첩함수의 경우에는 export가 안되기에 jest로 테스트가 불가능. 외부로 분리시키던가, statement 함수에 의존하여 테스트 되도록 처리.
+ */
+
+/**
  * @param { Object } invoice - 청구 내역 데이터를 담고 있는 객체
  * @param { string } invoice.customer - 고객명
  * @param { Array.<{ playID: string, audience: number }> } invoice.performances - 공연 내역 배열
@@ -37,13 +41,23 @@ export function statement(invoice, plays) {
 		return result;
 	}
 	
+	/**
+	 * @param { Object } aPerformance - 공연 내역
+	 * @param { number } aPerformance.audience - 공연 관객 수
+	 * @param { string } aPerformance.playID - 공연 ID
+	 * @returns { Object.<string, { name: string, type: string }> } -각 공연 ID에 해당하는 객체. 각 객체는 공연명과 공연 종류를 포함한다.
+	 */
+	function playFor(aPerformance) {
+		return plays[aPerformance.playID];
+	}
+	
 	let totalAmount = 0;
 	let volumeCredits = 0;
 	let result = `청구 내역 (고객명: ${invoice.customer}\n`;
 	const format = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2 }).format;
 	
 	for (let perf of invoice.performances) {
-		const play = plays[perf.playID];
+		const play = playFor(perf);
 		let thisAmount = amountFor(perf, play)
 		
 		// 포인트를 적립한다.
