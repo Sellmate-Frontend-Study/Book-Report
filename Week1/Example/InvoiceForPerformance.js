@@ -12,10 +12,22 @@
 export function statement(invoice, plays) {
 	
 	/**
+	 * @param { { audience: number, playID: string } } perf - 각 공연 ID에 해당하는 객체. 각 객체는 공연명과 공연 종류를 포함.
+	 * @returns { number }
+	 */
+	function volumeCreditsFor(perf) {
+		let volumeCredits = 0;
+		volumeCredits += Math.max(perf.audience - 30, 0);
+		if ('comedy' === playFor(perf).type)
+			volumeCredits += Math.floor(perf.audience / 5);
+		return volumeCredits;
+	}
+	
+	/**
 	 * @param { Object } aPerformance - 공연 내역
 	 * @param { number } aPerformance.audience - 공연 관객 수
 	 * @param { string } aPerformance.playID - 공연 ID
-	 * @returns { { name: string, type: string } } -각 공연 ID에 해당하는 객체. 각 객체는 공연명과 공연 종류를 포함한다.
+	 * @returns { { name: string, type: string } } - 각 공연 ID에 해당하는 객체. 각 객체는 공연명과 공연 종류를 포함.
 	 */
 	function playFor(aPerformance) {
 		return plays[aPerformance.playID];
@@ -57,10 +69,7 @@ export function statement(invoice, plays) {
 	const format = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 }).format;
 	
 	for (let perf of invoice.performances) {
-		// 포인트를 적립한다.
-		volumeCredits += Math.max(perf.audience - 30, 0);
-		// 희극 관객 5명마다 추가 포인트를 제공한다.
-		if ('comedy' === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
+		volumeCredits += volumeCreditsFor(perf);
 		
 		// 청구 내역을 출력한다.
 		result += `${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${perf.audience}석)\n`;
