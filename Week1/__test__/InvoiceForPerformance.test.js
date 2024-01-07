@@ -2,8 +2,8 @@ const invoices = require("../MockData/invoices.json");
 const plays = require("../MockData/plays.json");
 const { statement } = require("../Example/InvoiceForPerformance");
 
-describe('statement 함수 테스트', () => {
-	test('statement 함수 결과 테스트', () => {
+describe('공연 청구 내역 생성', () => {
+	test('다양한 공연에 대한 청구 내역 생성', () => {
 		const expected = `청구 내역 (고객명: BigCo\n` +
 			`Hamlet: $650.00 (55석)\n` +
 			`As You Like It: $580.00 (35석)\n` +
