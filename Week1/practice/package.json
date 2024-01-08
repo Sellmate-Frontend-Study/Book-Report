@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "jest"
+    "test": "node_modules/.bin/jest"
   },
   "dependencies": {
     "jest": "^29.7.0"
