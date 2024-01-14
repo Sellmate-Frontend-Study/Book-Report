@@ -4,6 +4,8 @@
 - node.js v18.18.0
 - bun.js v1.0.3
 - typescript 및 esm 모듈 사용
+- json-server로 목업 데이터 서버 사용
+- eslint, prettier 적용
 
 ## Install
 bun.js 는 window에서는 제한적으로 실행가능. 
@@ -13,5 +15,6 @@ macOs 혹은 Linux에서 설치 및 실행 권장
 
 ```bash
 bun install
+bun start # start json-server
 bun test # or bun jest
 ```
