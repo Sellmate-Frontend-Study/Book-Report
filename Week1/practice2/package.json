@@ -1,0 +1,25 @@
+{
+  "type": "module",
+  "scripts": {
+    "test": "jest",
+    "start": "json-server --watch data/db.json --port 3001"
+  },
+  "name": "practice2",
+  "module": "index.ts",
+  "dependencies": {
+    "@types/jest": "^29.5.11",
+    "axios": "^1.6.5",
+    "eslint-config-prettier": "^9.1.0",
+    "jest": "^29.7.0",
+    "json-server": "^1.0.0-alpha.21",
+    "prettier": "^3.2.2",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
