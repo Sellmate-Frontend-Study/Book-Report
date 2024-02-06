@@ -20,33 +20,62 @@
 4. 목적에 맞는 이름을 붙인다.
    - 무엇을 하는지 드러나는 이름.
    - 이름이 떠오르지 않는다면 함수로 추출하면 안 된다는 신호.
+
+```javascript
+function printOwing(invoice) {
+   console.log('*********************');
+   console.log('****** 고객 채무 ******');
+   console.log('*********************');
+
+   let outstanding = 0;
+
+   for (const o of invoice.orders) {
+      outstanding += o.amount;
+   };
+
+   const today = Clock.today;
+   invoice.dueDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 30);
+
+   console.log(`고객명 ${invoice.customer}`);
+   console.log(`채무액 ${outstanding}`);
+   console.log(`마감일 ${invoice.dueDate.toLocaleDateString()}`);
+}
+```
+ ⬇️
 ```javascript
 function printBanner() {
-  console.log('**********************');
-  console.log('******* 고객 채무 *******);
-  console.log('**********************');
+   console.log('*********************');
+   console.log('****** 고객 채무 ******');
+   console.log('*********************');
 };
 
 function printDetail(invoice, outstanding) {
-  console.log(`고객명 ${invoice.customer}`);
-  console.log(`채무액 ${outstanding}`);
-  console.log(`마감일 ${invoice.dueDate.toLocaleDateString()}`);
+   console.log(`고객명 ${invoice.customer}`);
+   console.log(`채무액 ${outstanding}`);
+   console.log(`마감일 ${invoice.dueDate.toLocaleDateString()}`);
+};
+
+function recordDueDate(invoice) {
+   const today = Clock.today;
+   invoice.dueDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 30);
+};
+
+function calculateOutstanding(invoice) {
+   let outstanding = 0;
+   for (const o of invoice.orders) {
+      outstanding += o.amount;
+   };
+   return outstanding;
 };
 
 function printOwing(invoice) {
+   printBanner();
 
-  printBanner();
+   calculateOutstanding(invoice);
 
-  let outstanding = 0;
+   recordDueDate(invoice);
 
-  for (const o of invoice.orders) {
-    outstanding += o.amount;
-  }
-
-  const today = Clock.today;
-  invoice.dueDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 30);
-
-  printDetail(invoice, outstanding);
+   printDetail(invoice, outstanding);
 }
 ```
 
