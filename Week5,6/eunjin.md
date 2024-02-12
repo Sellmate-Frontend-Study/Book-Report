@@ -80,6 +80,30 @@ function printOwing(invoice) {
 ```
 
 #### 6-2. 함수 인라인하기
+
+1. 다형 메서드인지 확인.
+   - 서브 클래스에서 오버라이드 하는 메서드는 인라인 하면 안 된다.
+2. 인라인 할 함수를 호출하는 곳을 모두 찾아서 각 호출문을 함수 본문으로 교체
+3. 교체 할 때마다 테스트.
+4. 기존 함수 삭제.
+
+```javascript
+function rating(aDriver) {
+   return moreThanFiveLateDelivers(aDriver) ? 2 : 1
+}
+
+function moreThanFiveLateDelivers(dvr) {
+   returjn dvr.numberOfLateDelivers > 5
+}
+```
+⬇️
+
+```javascript
+function rating(aDriver) {
+   return aDriver.numberOfLateDelivers > 5 ? 2 : 1
+}
+```
+
 #### 6-3. 변수 추출하기
 #### 6-4. 변수 인라인하기
 #### 6-5. 함수 선언바꾸기
