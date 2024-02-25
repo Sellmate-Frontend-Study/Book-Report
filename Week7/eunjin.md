@@ -96,6 +96,21 @@ myRefrigerator.addGrocery('Tofu')
 myRefrigerator.removeGrocery('Tofu')
 ```
 
+#### 7-3. 기본형을 객체로 바꾸기
+
+단순 string, number로 사용되던 특정 상태를 모아서 객체로 변경
+객체로 바꾸면 함수를 추가 가능해서 객체 내부로 캡슐화가 가능함
+
+```javascript
+orders.filter(o => "high" === o.priority || "rush" === o.priority);
+```
+
+⬇️
+
+```javascript
+orders.filter(o => o.priority.higherThan(new Priority("normal")))
+```
+
 ## 📚 느낀점
 
 중첩된 레코드으 경우 너무 복잡해지는 경향이 있는 것 같다!
