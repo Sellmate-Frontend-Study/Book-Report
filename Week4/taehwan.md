@@ -1,4 +1,4 @@
-## CHAPTER 03 코드에서 나는 악취
+## CHAPTER 04 테스트 구축하기
 
 ## 📚 읽은 내용
 - CHAPTER 4

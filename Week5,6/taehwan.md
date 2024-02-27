@@ -1,4 +1,4 @@
-## CHAPTER 03 코드에서 나는 악취
+## CHAPTER 05 리팩터링 카탈로그 보는 법, CHAPTER 06 기본적인 리팩터링
 
 ## 📚 읽은 내용
 - CHAPTER 5
